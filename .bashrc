@@ -20,13 +20,17 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo `date +%F\ \(%H:%M:%
 
 #Aliases
 #############
-alias sorry='sudo $(history -p !!)'
-
+alias ll='ls -la'
+alias fuck='sudo $(history -p !!)'
+alias whatismyip='curl http://ifconfig.me'
+alias vpn_up='nmcli con up'
+alias vpn_down='nmcli con down'
+alias git-clean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
+alias git-fast-add='git status| grep modified| awk -F: '{print $NF}'|xargs git add'
 
 
 #Git shell customizations
 ##############################
-
 if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
@@ -48,7 +52,6 @@ ssh-add ~/.ssh/*_rsa
 
 #Devel. customizations
 #################################
-
 #python-env
 export PYTHONPATH=$HOME/python/2.7.x/modules
 export PYTHONSTARTUP=~/.pythonrc
