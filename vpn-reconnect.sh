@@ -3,7 +3,7 @@
 set -e
 set -u
 
-conn_name='nrgene'
+conn_name='test'
 
 while [ 1 ] ;do
   status=$(nmcli con status id ${conn_name} |grep GENERAL.STATE|awk -F: '{print $NF}'|sed 's/ //g')
