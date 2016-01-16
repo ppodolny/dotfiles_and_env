@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+set -e 
+set -u
+
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clustershell 
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clustershell sysdig 
 
 # dev stuff
 sudo apt-get install -y python-pip python-virtualenv git meld vim git-extras
@@ -14,6 +17,7 @@ sudo add-apt-repository ppa:webupd8team/java -y
 sudo apt-get update
 sudo apt-get install -y oracle-java8-installer
 sudo apt-get install -y virtualbox
+
 # sublime
 sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update
@@ -26,9 +30,9 @@ sudo apt-get update
 sudo apt-get install pycharm -y
 
 # vagrant
-vagrant_version="1.7.4"
+vagrant_version="1.8.1"
 wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${vagrant_version}_x86_64.deb -P /tmp
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
 
 # pip stuff
-sudo pip install awscli
+sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 --upgrade
