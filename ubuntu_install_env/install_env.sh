@@ -9,8 +9,8 @@ sudo apt-get update
 sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clustershell sysdig 
 
 # dev stuff
-sudo apt-get install -y python-pip python-virtualenv git meld vim git-extras
-sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip pigz 
+sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip pigz ccze pv
+sudo apt-get install -y python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv
 
 # oracle jdk8
 sudo add-apt-repository ppa:webupd8team/java -y
