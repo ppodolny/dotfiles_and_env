@@ -32,3 +32,6 @@
 
 [push]
     default = simple
+[user]
+	email = paul.podolny@gmail.com
+	name = Paul P
