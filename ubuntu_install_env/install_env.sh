@@ -6,7 +6,7 @@ set -u
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clustershell sysdig 
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clustershell sysdig apt-file
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip pigz ccze pv
@@ -31,8 +31,8 @@ sudo apt-get install pycharm -y
 
 # vagrant
 vagrant_version="1.8.1"
-wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${vagrant_version}_x86_64.deb -P /tmp
-sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb
+wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
+sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
 sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 --upgrade
