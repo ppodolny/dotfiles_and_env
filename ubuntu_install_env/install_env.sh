@@ -10,7 +10,7 @@ sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux wget curl clu
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext unzip pigz ccze pv
-sudo apt-get install -y python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv
+sudo apt-get install -y python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv ipython
 
 # oracle jdk8
 sudo add-apt-repository ppa:webupd8team/java -y
@@ -35,4 +35,4 @@ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${vagrant_version}_x86_64.
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
-sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 --upgrade
+sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click --upgrade
