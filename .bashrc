@@ -68,17 +68,6 @@ eval `ssh-agent -s`
 ssh-add ~/.ssh/*_rsa
 
 
-#Devel. customizations
-#################################
-#python-env
-export PYTHONPATH=$HOME/python/2.7.x/modules
-export PYTHONSTARTUP=~/.pythonrc
-
-#ruby-env
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
-
-
 #AWS customizations
 ###################################
 export AWS_ACCESS_KEY_ID=''
