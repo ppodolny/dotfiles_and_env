@@ -7,8 +7,8 @@
 set -e
 set -u
 
-wifi_name='my-wifi' # leave completely empty (w/o quotes) to skip wifi reconnection attempts 
-vpn_name='my-vpn' 
+wifi_name='' # leave completely empty (w/o quotes) to skip wifi reconnection attempts 
+vpn_name='test' 
 office_name="my-office-connection"
 url_ping_test="www.google.com"
 
@@ -26,14 +26,14 @@ echo "starting vpn keep-alive..."
 while [ 1 ] ;do
   if ! ping -c1 ${url_ping_test} &>/dev/null; then
      if [[ $wifi_name != "" ]]; then
-       echo "`date +"%Y-%m-%d:%H:%M:%S"` oh no, ping failed - trying to bring WiFi back up..."
+       echo "`date +%Y-%m-%d:%H:%M:%S` oh no, ping failed - trying to bring WiFi back up..."
        nmcli nm wifi on
        nmcli c up id $wifi_name
      fi
   else
      status=$(nmcli con status id ${vpn_name} |grep GENERAL.STATE|awk -F: '{print $NF}'|sed 's/ //g')
      if [[ ${status} !=  "activated" ]] ;then
-        echo "`date +"%Y-%m-%d:%H:%M:%S` oh oh, VPN disconnection detected, trying to reconnect..."
+        echo "`date +%Y-%m-%d:%H:%M:%S` oh oh, VPN disconnection detected, trying to reconnect..."
         nmcli con up id ${vpn_name}
      fi
   fi
