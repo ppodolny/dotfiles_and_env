@@ -10,13 +10,14 @@ sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget cu
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext ccze pv jq  \
-python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv ipython json2csv csvkit xml2json parallel
+python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv ipython parallel
 
 # oracle jdk8
-sudo add-apt-repository ppa:webupd8team/java -y && \
+sudo apt-get install -y python-software-properties debconf-utils && \
+sudo add-apt-repository -y ppa:webupd8team/java && \
 sudo apt-get update && \
-sudo apt-get install -y oracle-java8-installer 
-sudo apt-get install -y virtualbox
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections && \
+sudo apt-get install -y oracle-java8-installer
 
 # sublime
 sudo add-apt-repository ppa:webupd8team/sublime-text-3 && \
@@ -31,8 +32,9 @@ sudo apt-get install pycharm -y
 
 # vagrant
 vagrant_version="1.8.1"
-wget https://dl.bintray.com/mitchellh/vagrant/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
+sudo apt-get install -y virtualbox
+wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
-sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click --upgrade
+sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click
