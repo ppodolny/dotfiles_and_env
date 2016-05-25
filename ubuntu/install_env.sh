@@ -30,9 +30,15 @@ sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb
 sudo apt-get update && \
 sudo apt-get install pycharm -y
 
+# virtualbox
+sudo bash -c "echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' >> /etc/apt/sources.list.d/vbox.list"
+sudo wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | sudo apt-key add -
+sudo wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sudo apt-get update && \
+sudo apt-get install virtualbox-5.0 -y
+
 # vagrant
 vagrant_version="1.8.1"
-sudo apt-get install -y virtualbox
 wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
