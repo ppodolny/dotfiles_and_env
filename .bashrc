@@ -150,10 +150,23 @@ alias check_erb='function _checkerb(){ erb -x -T '-' $1 |ruby -c ; };_checkerb'
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#Syntax check functions
 check_erb() {
   erb -x -T '-' $1 | ruby -c
 }  
 
+check_xml() {
+  xmllint --noout $1
+}
+
+check_yaml(){
+  ruby -e "require 'yaml'; YAML.parse(File.open('$1'))";
+}
+
+check_json(){
+  cat $1 | python -m json.tool
+}
 
 # Add Git branch ,if it's present, to PS1
 parse_git_branch() {
