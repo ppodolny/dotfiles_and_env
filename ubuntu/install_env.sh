@@ -10,7 +10,10 @@ sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget cu
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext ccze pv jq  \
-python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv ipython parallel
+python-pip python-virtualenv git meld vim git-extras unzip pigz ccze pv ipython parallel xchat terminator 
+
+# multimedia etc
+sudo apt-get install -y vlc nicotine
 
 # oracle jdk8
 sudo apt-get install -y python-software-properties debconf-utils && \
@@ -43,6 +46,7 @@ wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
+sudo pip install pip --upgrade
 sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click
 
 # fzf addon for bash
