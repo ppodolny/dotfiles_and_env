@@ -44,3 +44,7 @@ sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
 sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click
+
+# fzf addon for bash
+cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
