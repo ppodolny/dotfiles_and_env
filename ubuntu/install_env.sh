@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# this script bootstraps a new working environment
 
 set -e 
 set -u
@@ -47,8 +49,11 @@ sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
 sudo pip install pip --upgrade
-sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click
+sudo pip install awscli requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylint virtualenvwrapper
 
 # fzf addon for bash
 cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
+
+# ruby stuff
+\curl -sSL https://get.rvm.io | bash -s stable --ruby
