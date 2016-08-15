@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -u
+set -e
+
+# git pre-commit validator
+
+COMMAND=""
+
+determine_ext(){
+	EXTENSION=$(cat $1 | awk -F"." '{print $NF}')
+	case EXTENSION in
+		pp) COMMAND="puppet parser validate"
+			;;
+		rb) COMMAND="ruby -c"
+			;;
+		sh) COMMAND="bash -n"
+			;;
+		py) COMMAND="python -m"
+			;;
+	esac
+}
+
+git diff --name-only --cached | while read FILE; do
+    if [[ -f ${FILE} ]]; then
+    		determine_ext ${FILE}
+        "${COMMAND} ${FILE}" 1> /dev/null
+        if [ $? -ne 0 ]; then
+            echo -e "\e[1;31m\tAborting commit due to files with syntax errors.\e[0m" >&2
+            exit 1
+        fi
+    fi
+done || exit $?
