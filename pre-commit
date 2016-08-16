@@ -17,6 +17,10 @@ determine_ext(){
 			;;
 		py) COMMAND="python -m"
 			;;
+		xml) COMMAND="xmllint --noout"
+			;;
+		json) COMMAND="python -mjson.tool"
+			;;
 	esac
 }
 
