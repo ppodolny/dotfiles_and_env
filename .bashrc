@@ -145,6 +145,7 @@ alias vpn_up='nmcli con up'
 alias vpn_down='nmcli con down'
 alias git-clean='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
 alias check_erb='function _checkerb(){ erb -x -T '-' $1 |ruby -c ; };_checkerb'
+alias catn='tail -n +1'
 
 #Ruby stuff
 export PATH="$HOME/.rbenv/bin:$PATH"
