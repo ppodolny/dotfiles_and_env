@@ -8,7 +8,7 @@ set -u
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget curl clustershell sysdig apt-file
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget curl clustershell sysdig apt-file tree
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext ccze pv jq  \
