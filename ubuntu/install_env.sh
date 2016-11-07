@@ -28,6 +28,7 @@ sudo apt-get install -y oracle-java8-installer
 sudo add-apt-repository ppa:webupd8team/sublime-text-3 && \
 sudo apt-get update && \
 sudo apt-get install -y sublime-text-installer && \
+
 # pycharm
 sudo wget -q -O - http://archive.getdeb.net/getdeb-archive.key | sudo apt-key add -
 sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb apps" >> /etc/apt/sources.list.d/getdeb.list' && \
@@ -40,13 +41,13 @@ sudo apt-get update && \
 sudo apt-get install virtualbox-5.0 -y
 
 # vagrant
-vagrant_version="1.8.5"
+vagrant_version="1.8.7"
 wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
 sudo pip install pip --upgrade
-sudo pip install awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
+sudo pip install pylint flake8 awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
 
 # fzf addon for bash
 cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
