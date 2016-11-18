@@ -47,7 +47,7 @@ sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # pip stuff
 sudo pip install pip --upgrade
-sudo pip install pylint flake8 awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
+sudo pip install pylint flake8 autopep8 awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
 
 # fzf addon for bash
 cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
