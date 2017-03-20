@@ -8,7 +8,7 @@ set -u
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget curl clustershell sysdig apt-file tree
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget curl clustershell sysdig apt-file tree wireshark
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext ccze pv jq  \
@@ -21,7 +21,7 @@ sudo apt-get install -y vlc nicotine
 sudo apt-get install -y python-software-properties debconf-utils && \
 sudo add-apt-repository -y ppa:webupd8team/java && \
 sudo apt-get update && \
-echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections && \
+sudo bash -c  'echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections' && \
 sudo apt-get install -y oracle-java8-installer
 
 # sublime
@@ -41,17 +41,31 @@ sudo apt-get update && \
 sudo apt-get install virtualbox-5.0 -y
 
 # vagrant
-vagrant_version="1.8.7"
+vagrant_version="1.9.2"
 wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
+
+# docker
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' && \
+apt-get update && \
+apt-get install -y docker-engine && \
+systemctl status docker && \
+usermod -aG docker $(whoami)
 
 # pip stuff
 sudo pip install pip --upgrade
 sudo pip install pylint flake8 autopep8 awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
 
-# fzf addon for bash
+# fzf-addon for bash
 cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 
 # ruby stuff
 \curl -sSL https://get.rvm.io | bash -s stable --ruby
+
+# externall projects
+mkdir -p ~/git/external
+
+# tmux-css
+git clone https://github.com/dennishafemann/tmux-cssh ~/git/external
