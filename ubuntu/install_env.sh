@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# this script bootstraps a new working environment on ubuntu, tested on 14.04.x , 16.04.x
+# this script bootstraps a new working environment on ubuntu, tested on 16.04.x
 
 set -e 
 set -u
@@ -8,14 +8,15 @@ set -u
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync wget curl clustershell sysdig apt-file tree wireshark
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync \
+wget curl clustershell sysdig apt-file tree
 
 # dev stuff
 sudo apt-get install -y build-essential libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext ccze pv jq  \
-python-pipgit meld vim git-extras unzip pigz ccze pv ipython parallel xchat terminator 
+python-pip git meld vim git-extras unzip pigz ccze pv ipython parallel xchat terminator 
 
 # multimedia etc
-sudo apt-get install -y vlc nicotine
+sudo apt-get install -y vlc nicotine calibre
 
 # oracle jdk8
 sudo apt-get install -y python-software-properties debconf-utils && \
@@ -36,26 +37,36 @@ sudo apt-get update && \
 sudo apt-get install pycharm -y
 
 # virtualbox
+virtualbox_version='5.2.2'
 sudo bash -c "echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' >> /etc/apt/sources.list.d/vbox.list"
 sudo apt-get update && \
-sudo apt-get install virtualbox-5.0 -y
+sudo apt-get install virtualbox-${virtualbox_version} -y
 
 # vagrant
-vagrant_version="1.9.2"
+vagrant_version="2.0.1"
 wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
 sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
 
 # docker
-apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
-apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' && \
-apt-get update && \
-apt-get install -y docker-engine && \
-systemctl status docker && \
-usermod -aG docker $(whoami)
+sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
+sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main' && \
+sudo apt-get update && \
+sudo apt-get install -y docker-engine && \
+sudo systemctl status docker && \
+sudo usermod -aG docker $(whoami)
+
+# k8s
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
 
 # pip stuff
 sudo pip install pip --upgrade
-sudo pip install pylint flake8 autopep8 awscli virtualenv requests simplejson boto setuptools PyYAML ansible Jinja2 argparse click pylintv virtualenvwrapper.project
+
+# install pip packages globally
+sudo pip install pylint flake8 autopep8 awscli pyenv \
+requests simplejson boto3 setuptools PyYAML ansible \
+Jinja2 argparse click pylintv 
 
 # fzf-addon for bash
 cd /tmp ; git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
