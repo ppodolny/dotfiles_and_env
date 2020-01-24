@@ -8,7 +8,7 @@ set -u
 sudo apt-get update
 
 # system stuff
-sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync \
+sudo apt-get install -y sysstat strace ltrace htop nload nmap tmux rsync iperf \
 wget curl clustershell sysdig apt-file tree
 
 # dev stuff
@@ -18,12 +18,8 @@ python-pip git meld vim git-extras unzip pigz ccze pv ipython parallel xchat ter
 # multimedia etc
 sudo apt-get install -y vlc nicotine calibre
 
-# oracle jdk8
-sudo apt-get install -y python-software-properties debconf-utils && \
-sudo add-apt-repository -y ppa:webupd8team/java && \
-sudo apt-get update && \
-sudo bash -c  'echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | debconf-set-selections' && \
-sudo apt-get install -y oracle-java8-installer
+# openjdk9
+sudo apt-get install -y openjdk-9-jdk
 
 # sublime
 sudo add-apt-repository ppa:webupd8team/sublime-text-3 && \
@@ -36,19 +32,15 @@ sudo sh -c 'echo "deb http://archive.getdeb.net/ubuntu $(lsb_release -sc)-getdeb
 sudo apt-get update && \
 sudo apt-get install pycharm -y
 
-# virtualbox
-virtualbox_version='5.2.2'
-sudo bash -c "echo 'deb http://download.virtualbox.org/virtualbox/debian xenial contrib' >> /etc/apt/sources.list.d/vbox.list"
-sudo apt-get update && \
-sudo apt-get install virtualbox-${virtualbox_version} -y
-
-# vagrant
-vagrant_version="2.0.1"
-wget https://releases.hashicorp.com/vagrant/${vagrant_version}/vagrant_${vagrant_version}_x86_64.deb -P /tmp && \
-sudo dpkg -i /tmp/vagrant_${vagrant_version}_x86_64.deb && \rm /tmp/vagrant*.deb
-
-#tf
-tf_version="0.11.7"
+# minikube & virtualbox
+echo "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian  $(lsb_release -a|grep Codename|awk -F: '{print $NF}'|awk '{print $1}') contrib"  > /etc/apt/sources.list.d/vbox.list
+sudo apt-get update
+sudo apt-get install virtualbox-6.1 -y
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
+  && chmod +x minikube
+  
+#terraform
+tf_version="0.12.20"
 wget https://releases.hashicorp.com/terraform/${tf_version}/terraform_${tf_version}_linux_amd64.zip -P /tmp
 cd !$; unzip terraform*.zip
 sudo \rm /tmp/terraform*.zip 
